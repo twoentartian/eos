@@ -125,6 +125,10 @@ Options:
 #include "config.hpp"
 #include "httpc.hpp"
 
+// TYD Addition Begin
+#include "./eos_grid.hpp"
+// TYD Addition End
+
 using namespace std;
 using namespace eosio;
 using namespace eosio::chain;
@@ -1699,7 +1703,34 @@ CLI::callback_t header_opt_callback = [](CLI::results_t res) {
    return true;
 };
 
-int main( int argc, char** argv ) {
+// TYD Addition Begin
+int eos_main(int argc, char** argv);
+
+int main(int argc, char** argv)
+{
+    eos_grid::CommandInterpreter::Init();
+    int code = eos_grid::CommandInterpreter::Interpreter(argc,argv);
+    if(code == 0)
+    {
+
+    }
+    else if(code == 1)
+    {
+        std::cout<<"Command Not Found"<<std::endl;
+    }
+    else
+    {
+
+    }
+
+    return 0;
+    //eos_main(argc, argv);
+}
+
+
+int eos_main( int argc, char** argv ) {
+// TYD Addition End
+
    setlocale(LC_ALL, "");
    bindtextdomain(locale_domain, locale_path);
    textdomain(locale_domain);
